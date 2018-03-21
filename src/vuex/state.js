@@ -6,9 +6,9 @@
 const state = {
 
   vux:{
-    isLoading:true
+    //是否显示加载中
+    isLoading:false
   },
-  // isLoading:true
 
 }
 
