@@ -6,5 +6,4 @@
 const getters = {
 
 }
-export const name = ({state}) => state.birthModel.sbrxm
 export default getters

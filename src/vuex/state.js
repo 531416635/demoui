@@ -10,6 +10,16 @@ const state = {
     isLoading:false
   },
 
+  //用户信息
+  userInfo:{
+    openid:"",
+    nickname:"",
+    sex:"",
+    province:"",
+    city:"",
+    country:"",
+    headimgurl:"../../assets/vux_logo.png",
+  }
 }
 
 export default state

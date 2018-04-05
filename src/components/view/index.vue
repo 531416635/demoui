@@ -4,9 +4,10 @@
   <card><div slot="content"  style="height: 3rem;background-color: aqua;"></div></card>
   <div class="float_div">
     <div class="float_div_1">
-      <img src="../../assets/vux_logo.png">
+      <!--<img src="">-->
+      <img :src="userInfo.headimgurl">
       <div class="float_div_2">
-        <span class="float_div_2_span">用心感受全世界都是你的</span>
+        <span class="float_div_2_span">{{userInfo.nickname}}</span>
         <i class="iconfont  icon-dizhi"></i>
         <span class="float_div_2_span1">湖北省襄阳市盛特区1502室</span>
       </div>
@@ -56,12 +57,28 @@
 
 <script>
   import { Grid, GridItem,Card  } from 'vux'
+  import { mapState, mapActions } from 'vuex'
+
     export default {
-        name: "index",
+      name: "index",
       components: {
         Grid,
         GridItem,
         Card,
+      },
+      computed: {
+        ...mapState({
+          userInfo: state => state.userInfo
+
+        }),
+      },
+      methods: {
+        ...mapActions([
+          "getUserInfo",
+        ]),
+      },
+      mounted() {
+        this.getUserInfo();
       },
     }
 </script>
@@ -131,7 +148,7 @@
     vertical-align: top;
   }
   .float_div_2_span1{
-    width: 90%;
+    width: 85%;
     display: inline-block;
     overflow:hidden;
     white-space:nowrap;
