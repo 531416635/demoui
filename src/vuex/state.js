@@ -19,7 +19,10 @@ const state = {
     city:"",
     country:"",
     headimgurl:"../../assets/vux_logo.png",
-  }
+  },
+
+  //微信获取的地理位置
+  addressGps:""
 }
 
 export default state

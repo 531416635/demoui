@@ -5,7 +5,7 @@ import wx from 'weixin-js-sdk'
  * 解决跨域请求时，session丢失的问题（需与后台跨域请求一起设置Credentials）
  * @type {boolean}
  */
-axios.defaults.withCredentials=true;
+axios.defaults.withCredentials = true;
 
 const hostUrl = "http://47.94.99.53/demo0307/"
 //图片大小限制 5M的大小为 5*1024*1024 即 1048576*5
@@ -15,34 +15,34 @@ var imgSize = 5242880;
 const actions = {
 
   // todo 首页获取后台返回的用户信息
-  getUserInfo({ commit,state},val){
-      axios({
+  getUserInfo({commit, state}, val) {
+    axios({
       method: 'post',
       url: hostUrl + 'wechat/getUserInfo.do',
     }).then((response) => {
-        let code = response.data.code
-        let msgCode = response.data.msgCode
-        let result = response.data.result
-        if(code == 1 && msgCode == 1){
-          commit('setUserInfo',result)
-        }else{
-          let url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxec4ae298ee5742d7&redirect_uri=http%3a%2f%2f47.94.99.53%2fdemo0307%2fwechat%2fgetAuth.do&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect'
-          window.location.href = url
-        }
-    }).catch((err) =>{
+      let code = response.data.code
+      let msgCode = response.data.msgCode
+      let result = response.data.result
+      if (code == 1 && msgCode == 1) {
+        commit('setUserInfo', result)
+      } else {
+        let url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxec4ae298ee5742d7&redirect_uri=http%3a%2f%2f47.94.99.53%2fdemo0307%2fwechat%2fgetAuth.do&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect'
+        window.location.href = url
+      }
+    }).catch((err) => {
     })
   },
 
   //微信jssdk获取用户位置
-  getLocationWx({ commit,state},val){
+  getLocationWx({commit, state}, val) {
     let url = val.url
-    if("" == url || null == url || undefined == url){
+    if ("" == url || null == url || undefined == url) {
       return false;
     }
     axios({
       method: 'post',
       url: hostUrl + 'wechat/getJsSdkConfig.do',
-      data : {
+      data: {
         url: url
       },
     }).then((response) => {
@@ -70,11 +70,11 @@ const actions = {
             //对指定经纬度进行解析
             geocoder.getAddress(latLng);
             //设置服务请求成功的回调函数
-            geocoder.setComplete(function(result) {
-              alert(result.detail.location)
+            geocoder.setComplete(function (result) {
+              commit('setAddressGps', result.detail.address)
             });
             //若服务请求失败，则运行以下函数
-            geocoder.setError(function() {
+            geocoder.setError(function () {
               alert("出错了，获取经纬度失败！");
             });
           }
@@ -82,12 +82,12 @@ const actions = {
 
       })
 
-      this.$wechat.error(function(res){
+      this.$wechat.error(function (res) {
         // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
         console.log("error=========")
         console.log(res)
       });
-    }).catch((err) =>{
+    }).catch((err) => {
     })
   }
 

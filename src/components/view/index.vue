@@ -9,7 +9,7 @@
       <div class="float_div_2">
         <span class="float_div_2_span">{{userInfo.nickname}}</span>
         <i class="iconfont  icon-dizhi"></i>
-        <span class="float_div_2_span1">湖北省襄阳市盛特区1502室</span>
+        <span class="float_div_2_span1">{{addressGps}}</span>
       </div>
       <i class="iconfont icon-icon6"></i>
     </div>
@@ -68,8 +68,8 @@
       },
       computed: {
         ...mapState({
-          userInfo: state => state.userInfo
-
+          userInfo: state => state.userInfo,
+          addressGps: state => state.addressGps
         }),
       },
       methods: {
