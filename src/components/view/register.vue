@@ -20,14 +20,18 @@
       <x-input placeholder="请输入手机号码" mask="999 9999 9999" v-model="register.phone" :max="13" is-type="china-mobile"></x-input>
     </group>
     <group>
-      <x-address title="省市区"  v-model="register.address" raw-value :list="addressData"></x-address>
+      <x-address title="省市区"  v-model="addressGps.provinceCityDistrict" raw-value :list="addressData"></x-address>
     </group>
-    <div>{{addressGps}}</div>
+    <group>
+      <group-title slot="title">详细地址：</group-title>
+      <x-textarea placeholder="请输入详细的街道信息" :max="100" :rows="2" autosize></x-textarea>
+    </group>
+    <x-button  :disabled="disable001" @click.native="submitRegister" :show-loading="showLoad" type="primary">提交预约</x-button>
   </div>
 </template>
 
 <script>
-  import {Masker,XTextarea,XInput,Group,GroupTitle,XAddress,ChinaAddressV4Data   } from 'vux'
+  import {Masker,XTextarea,XInput,Group,GroupTitle,XAddress,ChinaAddressV4Data,XButton   } from 'vux'
   import { mapState, mapActions } from 'vuex'
 
   export default {
@@ -39,6 +43,7 @@
       Group,
       GroupTitle,
       XAddress,
+      XButton
     },
     data() {
       return {
@@ -48,6 +53,8 @@
         },
         addressData: ChinaAddressV4Data,
         title: '默认为空',
+        showLoad:false,
+        disable001:false
       }
     },
     computed: {
@@ -58,7 +65,12 @@
       }),
     },
     methods:{
-
+      //提交预约纪录
+      submitRegister:function(){
+        this.disable001 = true
+        this.showLoad = true
+        console.log("------------")
+      }
     }
   }
 </script>

@@ -65,13 +65,32 @@ const actions = {
 
             // 地址解析:http://lbs.qq.com/javascript_v2/guide-service.html#link-four
             //地址和经纬度之间进行转换服务
-            let geocoder = new qq.maps.Geocoder();
-            var latLng = new qq.maps.LatLng(latitude, longitude);
+            let geocoder = new qq.maps.Geocoder()
+            var latLng = new qq.maps.LatLng(latitude, longitude)
             //对指定经纬度进行解析
             geocoder.getAddress(latLng);
             //设置服务请求成功的回调函数
             geocoder.setComplete(function (result) {
-              commit('setAddressGps', result.detail.address)
+              //国家
+              let country = result.detail.addressComponents.country
+              //省
+              let province = result.detail.addressComponents.province
+              //市
+              let city = result.detail.addressComponents.city
+              //县 镇
+              let district = result.detail.addressComponents.district
+              //街道
+              let street = result.detail.addressComponents.street
+
+              //上面加起来的总地址
+              let address = result.detail.address
+              commit('setAddressGps', {
+                country:country,
+                province:province,
+                city:city,
+                district:district,
+                street:street,
+              })
             });
             //若服务请求失败，则运行以下函数
             geocoder.setError(function () {

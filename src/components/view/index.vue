@@ -9,7 +9,7 @@
       <div class="float_div_2">
         <span class="float_div_2_span">{{userInfo.nickname}}</span>
         <i class="iconfont  icon-dizhi"></i>
-        <span class="float_div_2_span1">{{addressGps}}</span>
+        <span class="float_div_2_span1">{{addressGps.detail}}</span>
       </div>
       <i class="iconfont icon-icon6"></i>
     </div>

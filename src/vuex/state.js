@@ -22,7 +22,10 @@ const state = {
   },
 
   //微信获取的地理位置
-  addressGps:"",
+  addressGps:{
+    detail:"",
+    provinceCityDistrict:[]
+  },
 
   //预约页面详情信息的展示
   register:{

@@ -16,7 +16,29 @@ const mutations = {
   },
   //设置GPS获取的地理位置
   setAddressGps(state, stateOfChange){
-        state.addressGps = stateOfChange
+    //国家
+    let country = stateOfChange.country
+    //省
+    let province = stateOfChange.province
+    //市
+    let city = stateOfChange.city
+    //县 镇
+    let district = stateOfChange.district
+    //街道
+    let street = stateOfChange.street
+        state.addressGps.detail = province + city + district + street
+        if("" == province || null ==province){
+          province = "--"
+        }
+        if("" == city || null ==city){
+          city = "--"
+        }
+        if("" == district || null ==district){
+          district = "--"
+        }
+        state.addressGps.provinceCityDistrict.push(province)
+        state.addressGps.provinceCityDistrict.push(city)
+        state.addressGps.provinceCityDistrict.push(district)
     },
 
   //预约页面详情信息的展示
