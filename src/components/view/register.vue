@@ -24,15 +24,16 @@
     </group>
     <group>
       <group-title slot="title">详细地址：</group-title>
-      <x-textarea placeholder="请输入详细的街道信息" :max="100" :rows="2" autosize></x-textarea>
+      <x-textarea placeholder="请输入详细的街道信息"  v-model="register.address" :max="100" :rows="2" autosize></x-textarea>
     </group>
     <x-button  :disabled="disable001" @click.native="submitRegister" :show-loading="showLoad" type="primary">提交预约</x-button>
   </div>
 </template>
 
 <script>
-  import {Masker,XTextarea,XInput,Group,GroupTitle,XAddress,ChinaAddressV4Data,XButton   } from 'vux'
+  import {Masker,XTextarea,XInput,Group,GroupTitle,XAddress,ChinaAddressV4Data,XButton,Value2nameFilter as value2name   } from 'vux'
   import { mapState, mapActions } from 'vuex'
+  import axios from 'axios'
 
   export default {
     name: "register",
@@ -69,7 +70,25 @@
       submitRegister:function(){
         this.disable001 = true
         this.showLoad = true
-        console.log("------------")
+        let addressValue = value2name(this.$store.state.addressGps.provinceCityDistrict, ChinaAddressV4Data)
+        axios({
+          method: 'post',
+          url: 'http://www.myyunfu.com/demo0307/order/createRegister.do',
+          data : {
+            register : this.$store.state.register,
+            addressGps : this.$store.state.addressGps,
+            addressValue : addressValue
+          }
+        }).then((response) => {
+//                        todo 这是个坑，response返回的code一定要用变量来存储 不然if内无法执行
+          let code = response.data.code
+          if(code == 1 ){
+            this.disable001 = false
+            this.showLoad = false
+          }
+        }).catch((err) =>{
+//          console.log(err)
+        })
       }
     }
   }

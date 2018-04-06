@@ -36,6 +36,7 @@ const mutations = {
         if("" == district || null ==district){
           district = "--"
         }
+        state.addressGps.provinceCityDistrict = []
         state.addressGps.provinceCityDistrict.push(province)
         state.addressGps.provinceCityDistrict.push(city)
         state.addressGps.provinceCityDistrict.push(district)
@@ -47,7 +48,6 @@ const mutations = {
     state.register.describe = stateOfChange.describe
     state.register.question = stateOfChange.question
     state.register.address = stateOfChange.address
-    state.register.dateTime = stateOfChange.dateTime
     state.register.phone = stateOfChange.phone
   }
 
