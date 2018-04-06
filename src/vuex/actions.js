@@ -47,7 +47,6 @@ const actions = {
       },
     }).then((response) => {
       let res = response.data
-      console.log(res)
       wx.config({
         debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
         appId: res.appId, // 必填，公众号的唯一标识
@@ -63,18 +62,21 @@ const actions = {
           success: function (res) {
             var latitude = res.latitude // 纬度，浮点数，范围为90 ~ -90
             var longitude = res.longitude // 经度，浮点数，范围为180 ~ -180。
-            var speed = res.speed // 速度，以米/每秒计
-            var accuracy = res.accuracy // 位置精度
 
             // 地址解析:http://lbs.qq.com/javascript_v2/guide-service.html#link-four
-            let geocoder = new qq.maps.Geocoder({
-              complete: function (result) {
-                resolve(result.detail.address)
-              }
-            })
-            var coord = new qq.maps.LatLng(res.latitude, res.longitude)
-            let add = geocoder.getAddress(coord)
-            alert(add)
+            //地址和经纬度之间进行转换服务
+            let geocoder = new qq.maps.Geocoder();
+            var latLng = new qq.maps.LatLng(latitude, longitude);
+            //对指定经纬度进行解析
+            geocoder.getAddress(latLng);
+            //设置服务请求成功的回调函数
+            geocoder.setComplete(function(result) {
+              alert(result.detail.location)
+            });
+            //若服务请求失败，则运行以下函数
+            geocoder.setError(function() {
+              alert("出错了，获取经纬度失败！");
+            });
           }
         })
 
