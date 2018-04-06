@@ -19,6 +19,16 @@ const mutations = {
         state.addressGps = stateOfChange
     },
 
+  //预约页面详情信息的展示
+  setRegister(state, stateOfChange){
+    state.register.title = stateOfChange.title
+    state.register.describe = stateOfChange.describe
+    state.register.question = stateOfChange.question
+    state.register.address = stateOfChange.address
+    state.register.dateTime = stateOfChange.dateTime
+    state.register.phone = stateOfChange.phone
+  }
+
 }
 
 export default mutations

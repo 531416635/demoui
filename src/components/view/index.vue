@@ -15,37 +15,37 @@
     </div>
   </div>
   <grid style="padding-top: 1rem;margin-left: 4%;">
-    <grid-item class="grid_1">
+    <grid-item class="grid_1" @on-item-click="goToRegister('1')">
       <i class="iconfont  icon-bingxiang" slot="icon"></i>
       <span slot="label" class="grid-center">冰箱维修</span>
     </grid-item>
   </grid>
   <grid style="padding-top: 1rem;float: right;margin-right: 4%;">
-    <grid-item class="grid_2">
+    <grid-item class="grid_2" @on-item-click="goToRegister('2')">
       <i class="iconfont  icon-xiyiji" slot="icon"></i>
       <span slot="label" class="grid-center">洗衣机维修</span>
     </grid-item>
   </grid>
-  <grid style="margin-left: 4%;">
-    <grid-item class="grid_3">
+  <grid style="margin-left: 4%;" >
+    <grid-item class="grid_3"@on-item-click="goToRegister('3')">
       <i slot="icon" class="iconfont  icon-password"></i>
       <span slot="label" class="grid-center">换锁芯</span>
     </grid-item>
   </grid>
-  <grid style="float: right;margin-right: 4%;">
-    <grid-item class="grid_4">
+  <grid style="float: right;margin-right: 4%;" >
+    <grid-item class="grid_4" @on-item-click="goToRegister('4')">
       <i class="iconfont  icon-dianshi" slot="icon"></i>
       <span slot="label" class="grid-center">电视维修</span>
     </grid-item>
   </grid>
-  <grid style="margin-left: 4%;">
-    <grid-item class="grid_5">
+  <grid style="margin-left: 4%;" >
+    <grid-item class="grid_5" @on-item-click="goToRegister('5')">
       <i class="iconfont  icon-kongtiao" slot="icon"></i>
       <span slot="label" class="grid-center">空调维修</span>
     </grid-item>
   </grid>
-  <grid style="float: right;margin-right: 4%;">
-    <grid-item class="grid_6">
+  <grid style="float: right;margin-right: 4%;" >
+    <grid-item class="grid_6" @on-item-click="goToRegister('6')">
       <i class="iconfont  icon-weixiugongguanli" slot="icon"></i>
       <span slot="label" class="grid-center">维修记录</span>
     </grid-item>
@@ -77,10 +77,41 @@
           "getUserInfo",
           "getLocationWx",
         ]),
+        goToRegister:function(result){
+          let title = "";
+          let describe = "";
+          if(1==result){
+            title = "冰箱维修";
+            describe = "现实中的她：是桥畔某处人家";
+          }else if(2==result){
+            title = "洗衣机维修";
+            describe = "现实中的她：是桥畔某处人家";
+          }else if(3==result){
+            title = "换锁芯";
+            describe = "现实中的她：是桥畔某处人家";
+          }else if(4==result){
+            title = "电视维修";
+            describe = "现实中的她：是桥畔某处人家";
+          }else if(5==result){
+            title = "空调维修";
+            describe = "现实中的她：是桥畔某处人家";
+          }else if(6==result){
+            title = "维修记录";
+            describe = "现实中的她：是桥畔某处人家";
+          }
 
+          this.$store.commit('setRegister', {
+            title:title,
+            describe:describe,
+          })
+
+          this.$router.push({ name: 'register'})
+        },
       },
       mounted() {
+        //获取用户信息
         this.getUserInfo();
+        //获取地理位置
         this.$store.dispatch({
           type: 'getLocationWx',
           url: window.location.href,
