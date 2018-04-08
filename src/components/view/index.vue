@@ -103,6 +103,7 @@
           this.$store.commit('setRegister', {
             title:title,
             describe:describe,
+            type:result,
           })
 
           this.$router.push({ name: 'register'})

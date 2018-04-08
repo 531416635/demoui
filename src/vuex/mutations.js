@@ -49,6 +49,7 @@ const mutations = {
 
   //预约页面详情信息的展示
   setRegister(state, stateOfChange){
+    state.register.type = stateOfChange.type
     state.register.title = stateOfChange.title
     state.register.describe = stateOfChange.describe
     state.register.question = stateOfChange.question

@@ -27,6 +27,7 @@ const state = {
 
   //预约页面详情信息的展示
   register:{
+    type:"",
     title:"",
     describe:"",
     question:"",
