@@ -4,6 +4,11 @@
 
 // 声明 mutations事件以使用actions提交
 const mutations = {
+
+  //loading状态显示控制
+  updateLoadingStatus (state, payload) {
+    state.isLoading = payload.isLoading
+  },
   //  渲染首页数据 用户信息和前三条历史记录
   setUserInfo(state, stateOfChange){
       state.userInfo.openid = stateOfChange.openid

@@ -9,7 +9,7 @@
 
 <script>
   import {  Loading, TransferDom } from 'vux'
-  import { mapState, mapActions } from 'vuex'
+  import { mapState } from 'vuex'
   export default {
     name: 'app',
     directives: {
@@ -20,7 +20,7 @@
     },
     computed:{
       ...mapState({
-        isLoading: state => state.vux.isLoading,
+        isLoading: state => state.isLoading,
       }),
     },
     created() {

@@ -7,6 +7,16 @@ import router from '@/router/index'
 import store from '@/vuex/store'
 import './assets/iconfont/iconfont.css'
 
+
+router.beforeEach(function (to, from, next) {
+  store.commit('updateLoadingStatus', {isLoading: true})
+  next()
+})
+
+router.afterEach(function (to) {
+  store.commit('updateLoadingStatus', {isLoading: false})
+})
+
 Vue.use(VueRouter)
 Vue.use(Vuex)
 

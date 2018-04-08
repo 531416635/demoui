@@ -26,7 +26,11 @@
       <group-title slot="title">详细地址：</group-title>
       <x-textarea placeholder="请输入详细的街道信息"  v-model="register.address" :max="100" :rows="2" autosize></x-textarea>
     </group>
-    <x-button  :disabled="disable001" @click.native="submitRegister" :show-loading="showLoad" type="primary">提交预约</x-button>
+    <div class="jianxi"></div>
+    <div style="margin: 10px">
+      <x-button  :disabled="disable001" @click.native="submitRegister" :show-loading="showLoad" type="primary">提交预约</x-button>
+    </div>
+    <div class="jianxi"></div>
   </div>
 </template>
 
@@ -125,5 +129,8 @@
   }
   .green {
     color: green;
+  }
+  .jianxi{
+    padding-top: 0.5rem;
   }
 </style>
