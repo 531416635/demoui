@@ -77,7 +77,7 @@
         let addressValue = value2name(this.$store.state.addressGps.provinceCityDistrict, ChinaAddressV4Data)
         axios({
           method: 'post',
-          url: 'http://www.myyunfu.com/demo0307/order/createRegister.do',
+          url: 'http://www.myyunfu.com/demo0307/wechat/createRegister.do',
           data : {
             register : this.$store.state.register,
             addressGps : this.$store.state.addressGps,

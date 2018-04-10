@@ -47,7 +47,7 @@ const mutations = {
         state.addressGps.provinceCityDistrict.push(district)
     },
 
-  //预约页面详情信息的展示
+  //预约页面信息填写
   setRegister(state, stateOfChange){
     state.register.type = stateOfChange.type
     state.register.title = stateOfChange.title
@@ -55,6 +55,13 @@ const mutations = {
     state.register.question = stateOfChange.question
     state.register.address = stateOfChange.address
     state.register.phone = stateOfChange.phone
+  },
+
+  //维修记录页面入参信息
+  setOrderPage(state, stateOfChange){
+    state.orderPage.currentPage = stateOfChange.currentPage
+    state.orderPage.pageSize = stateOfChange.pageSize
+    state.orderPage.orderStatus = stateOfChange.orderStatus
   }
 
 }

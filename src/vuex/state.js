@@ -25,7 +25,7 @@ const state = {
     provinceCityDistrict:[]
   },
 
-  //预约页面详情信息的展示
+  //预约页面信息填写
   register:{
     type:"",
     title:"",
@@ -34,7 +34,15 @@ const state = {
     address:"",
     dateTime:"",
     phone:"",
+  },
+
+  //维修记录页面入参信息
+  orderPage:{
+    currentPage:1,
+    pageSize:10,
+    orderStatus:"0",
   }
+
 }
 
 export default state

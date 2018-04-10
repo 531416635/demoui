@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import index from '@/components/view/index'
 import register from '@/components/view/register'
+import detail from '@/components/view/detail'
 
 Vue.use(Router)
 
@@ -14,6 +15,10 @@ var routeData = [
     path: '/register',
     name: 'register',
     component: register
+  }, {
+    path: '/detail',
+    name: 'detail',
+    component: detail
   },
 ]
 

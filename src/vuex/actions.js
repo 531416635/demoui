@@ -108,8 +108,45 @@ const actions = {
       });
     }).catch((err) => {
     })
-  }
+  },
 
+
+  //获取用户维修记录
+  getUserOrder({commit, state}, val) {
+
+    let currentPage = state.orderPage.currentPage
+    let pageSize = state.orderPage.pageSize
+    let orderStatus = state.orderPage.orderStatus
+    console.log("currentPage:"+currentPage)
+    console.log("pageSize:"+pageSize)
+    console.log("orderStatus:"+orderStatus)
+    axios({
+      method: 'post',
+      url: hostUrl + 'wechat/getOrder.do',
+      data : {
+        currentPage : currentPage,
+        pageSize : pageSize,
+        orderStatus : orderStatus,
+      }
+    }).then((response) => {
+
+      commit('setOrderPage', {
+        currentPage:currentPage+1,
+        pageSize:pageSize,
+        orderStatus:orderStatus,
+      })
+
+      let code = response.data.code
+      let msgCode = response.data.msgCode
+      let result = response.data.result
+      if (code == 1 && msgCode == 1) {
+        commit('setUserInfo', result)
+      } else {
+
+      }
+    }).catch((err) => {
+    })
+  },
 }
 
 export default actions

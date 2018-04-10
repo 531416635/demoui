@@ -100,13 +100,17 @@
             describe = "现实中的她：是桥畔某处人家";
           }
 
-          this.$store.commit('setRegister', {
-            title:title,
-            describe:describe,
-            type:result,
-          })
+          if(6==result){
+            this.$router.push({ name: 'detail'})
+          }else {
+            this.$store.commit('setRegister', {
+              title:title,
+              describe:describe,
+              type:result,
+            })
 
-          this.$router.push({ name: 'register'})
+            this.$router.push({ name: 'register'})
+          }
         },
       },
       mounted() {
