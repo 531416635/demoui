@@ -41,7 +41,12 @@ const state = {
     currentPage:1,
     pageSize:10,
     orderStatus:"0",
-  }
+  },
+
+  orderListData: [], // 下拉更新数据存放数组
+  orderDownData: [], // 上拉更多的数据存放数组
+
+
 
 }
 
