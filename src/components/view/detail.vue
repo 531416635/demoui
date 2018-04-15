@@ -8,7 +8,7 @@
       </tab>
 
       <div>
-        <swiper v-model="tabIndex" height="11.5rem" :show-dots="false">
+        <swiper v-model="tabIndex" :style="{height: clientHeight}" :show-dots="false">
           <swiper-item class="swiper-demo-img" v-for="(item1, index) in 4" :key="index">
             <v-scroll :on-refresh="onRefresh" :on-infinite="onInfinite">
               <ul>
@@ -113,5 +113,12 @@
 </script>
 
 <style scoped  lang="less">
+.vux-tab{
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  width: 100%;
+},
 
 </style>
