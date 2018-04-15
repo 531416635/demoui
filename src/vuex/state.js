@@ -41,12 +41,12 @@ const state = {
     currentPage:1,
     pageSize:10,
     orderStatus:"0",
+    totalCount:0,
+    isShowMore:true,
   },
 
-  orderListData: [], // 下拉更新数据存放数组
-  orderDownData: [], // 上拉更多的数据存放数组
-
-
+  //维修记录出参数据
+  orderList: [],
 
 }
 

@@ -16,7 +16,8 @@
       <slot></slot>
       <footer class="load-more">
         <slot name="load-more">
-          <span>加载中……</span>
+          <span v-if="orderPage.isShowMore">加载中……</span>
+          <span v-else>没有更多数据了</span>
         </slot>
       </footer>
     </section>
@@ -24,6 +25,9 @@
 </template>
 
 <script>
+
+  import { mapState } from 'vuex'
+
   export default {
     props: {
       offset: {
@@ -57,6 +61,11 @@
         touching: false,
         infiniteLoading: false
       }
+    },
+    computed: {
+      ...mapState({
+        orderPage: state => state.orderPage,
+      }),
     },
     methods: {
       touchStart(e) {
@@ -133,7 +142,7 @@
 <style>
   .yo-scroll {
     position: absolute;
-    top: 2.5rem;
+    top: 0rem;
     right: 0;
     bottom: 0;
     left: 0;

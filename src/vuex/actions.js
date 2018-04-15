@@ -8,6 +8,7 @@ import wx from 'weixin-js-sdk'
 axios.defaults.withCredentials = true;
 
 const hostUrl = "http://www.myyunfu.com/demo0307/"
+// const hostUrl = "http://localhost:8090/demo0307/"
 //图片大小限制 5M的大小为 5*1024*1024 即 1048576*5
 var imgSize = 5242880;
 
@@ -117,35 +118,38 @@ const actions = {
     let currentPage = state.orderPage.currentPage
     let pageSize = state.orderPage.pageSize
     let orderStatus = state.orderPage.orderStatus
-    console.log("currentPage:"+currentPage)
-    console.log("pageSize:"+pageSize)
-    console.log("orderStatus:"+orderStatus)
-    axios({
-      method: 'post',
-      url: hostUrl + 'wechat/getOrder.do',
-      data : {
-        currentPage : currentPage,
-        pageSize : pageSize,
-        orderStatus : orderStatus,
-      }
-    }).then((response) => {
+    let isShowMore = state.orderPage.isShowMore
+    if(isShowMore){
+      axios({
+        method: 'post',
+        url: hostUrl + 'wechat/getOrder.do',
+        data : {
+          currentPage : currentPage,
+          pageSize : pageSize,
+          orderStatus : orderStatus,
+        }
+      }).then((response) => {
 
-      commit('setOrderPage', {
-        currentPage:currentPage+1,
-        pageSize:pageSize,
-        orderStatus:orderStatus,
+        //渲染订单数据
+        let code = response.data.code
+        let orderList = response.data.result
+        //订单总数
+        let totalCount = response.data.totalCount
+        if (code == 1) {
+          commit('setOrderList', orderList)
+        }
+
+        //渲染订单参数
+        commit('setOrderPage', {
+          currentPage:currentPage,
+          pageSize:pageSize,
+          orderStatus:orderStatus,
+          totalCount:totalCount,
+        })
+
+      }).catch((err) => {
       })
-
-      let code = response.data.code
-      let msgCode = response.data.msgCode
-      let result = response.data.result
-      if (code == 1 && msgCode == 1) {
-        commit('setUserInfo', result)
-      } else {
-
-      }
-    }).catch((err) => {
-    })
+    }
   },
 }
 

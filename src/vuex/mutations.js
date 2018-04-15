@@ -59,11 +59,45 @@ const mutations = {
 
   //维修记录页面入参信息
   setOrderPage(state, stateOfChange){
-    state.orderPage.currentPage = stateOfChange.currentPage
-    state.orderPage.pageSize = stateOfChange.pageSize
-    state.orderPage.orderStatus = stateOfChange.orderStatus
-  }
+    let totalCount = stateOfChange.totalCount
+    let currentPage = stateOfChange.currentPage
+    let pageSize = stateOfChange.pageSize
+    let isShowMore = stateOfChange.isShowMore
+    //总条数
+    state.orderPage.totalCount = totalCount
+    //总条数为0 或者 总条数小于等于 当前页数与页面大小的 积 则无需加载更多
+    if(0 == totalCount || totalCount <= pageSize * currentPage){
+      state.orderPage.currentPage = currentPage
+      state.orderPage.isShowMore = false
+    }else {
+      state.orderPage.currentPage = currentPage + 1
+      state.orderPage.isShowMore = true
+    }
+    // 若指定了显示加载更多；则tab切换时 应该显示
+    if(isShowMore){
+      state.orderPage.isShowMore = true
+    }
+    state.orderPage.pageSize = pageSize
+    //解决下拉刷新时订单状态不用改变
+    if(null !=stateOfChange.orderStatus && undefined != stateOfChange.orderStatus){
+      state.orderPage.orderStatus = stateOfChange.orderStatus
+    }
+  },
 
+  //维修记录出参数据
+  setOrderList(state, stateOfChange){
+    //下拉刷新时 直接更换记录值
+    if(1 == state.orderPage.currentPage){
+      state.orderList = stateOfChange
+    }else{
+      //上拉加载数据时，拼接订单数据
+      state.orderList.concat(stateOfChange)
+    }
+  },
+  //清空维修记录数据
+  clearOrderList(state, stateOfChange){
+      state.orderList = []
+  },
 }
 
 export default mutations
